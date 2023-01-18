@@ -9,7 +9,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -42,10 +41,11 @@ fun LemonTree(
     var state by remember { mutableStateOf(1) }
 
     val imageModifier = Modifier
-        .border(BorderStroke(2.dp, Color(105, 205, 216))
-        ,shape = RoundedCornerShape(4.dp))
+        .border(
+            BorderStroke(2.dp, Color(105, 205, 216)), shape = RoundedCornerShape(4.dp)
+        )
         .clickable {
-            when(state) {
+            when (state) {
                 1 -> state++
                 2 -> state += (0..1).random()
                 3 -> state++
@@ -76,7 +76,7 @@ fun LemonTree(
             painter = painterResource(id = imageResource),
             contentDescription = "LemonTree",
             modifier = imageModifier
-            )
+        )
     }
 }
 
