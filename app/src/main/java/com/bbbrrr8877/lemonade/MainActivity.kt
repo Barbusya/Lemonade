@@ -8,8 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Shapes
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,25 +39,27 @@ fun LemonTree(
         .fillMaxSize()
         .wrapContentSize(Alignment.Center)
 ) {
-    var image by remember { mutableStateOf(1) }
+    var state by remember { mutableStateOf(1) }
+
     val imageModifier = Modifier
-        .border(BorderStroke(3.dp, Color(R.color.image_border)))
+        .border(BorderStroke(2.dp, Color(105, 205, 216))
+        ,shape = RoundedCornerShape(4.dp))
         .clickable {
-            when(image) {
-                1 -> image++
-                2 -> image += (0..1).random()
-                3 -> image++
-                else -> image = 1
+            when(state) {
+                1 -> state++
+                2 -> state += (0..1).random()
+                3 -> state++
+                else -> state = 1
             }
         }
-    val imageResource = 1
-     when (image) {
+
+    val imageResource = when (state) {
         1 -> R.drawable.lemon_tree
         2 -> R.drawable.lemon_squeeze
         3 -> R.drawable.lemon_drink
         else -> R.drawable.lemon_restart
     }
-    val textResource = when (image) {
+    val textResource = when (state) {
         1 -> R.string.lemon_tree
         2 -> R.string.lemon
         3 -> R.string.glass_of_lemonade
@@ -68,11 +70,11 @@ fun LemonTree(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(stringResource(textResource), fontSize = 20.sp)
+        Text(stringResource(textResource), fontSize = 18.sp)
         Spacer(modifier = Modifier.height(16.dp))
         Image(
             painter = painterResource(id = imageResource),
-            contentDescription = image.toString(),
+            contentDescription = "LemonTree",
             modifier = imageModifier
             )
     }
